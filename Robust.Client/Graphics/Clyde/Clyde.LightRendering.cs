@@ -451,6 +451,7 @@ namespace Robust.Client.Graphics.Clyde
             var lastPower = float.NaN;
             var lastColor = new Color(float.NaN, float.NaN, float.NaN, float.NaN);
             var lastSoftness = float.NaN;
+            var lastSourceSize = float.NaN;
             var lastFalloff = float.NaN;
             var lastCurveFactor = float.NaN;
             Texture? lastMask = null;
@@ -504,6 +505,12 @@ namespace Robust.Client.Graphics.Clyde
                     {
                         lastSoftness = component.Softness;
                         lightShader.SetUniformMaybe("lightSoftness", lastSoftness);
+                    }
+
+                    if (!MathHelper.CloseToPercent(lastSourceSize, component.SourceSize))
+                    {
+                        lastSourceSize = component.SourceSize;
+                        lightShader.SetUniformMaybe("lightSourceSize", lastSourceSize);
                     }
 
                     if (!MathHelper.CloseToPercent(lastFalloff, component.Falloff))

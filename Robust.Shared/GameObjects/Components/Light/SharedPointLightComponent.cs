@@ -36,6 +36,13 @@ namespace Robust.Shared.GameObjects
         public float Softness { get; set; } = 1f;
 
         /// <summary>
+        ///     Физический радиус источника света в мировых единицах.
+        ///     Не изменяет дальность света, но расширяет равномерно освещённый центр и полутень.
+        /// </summary>
+        [DataField("sourceSize"), Animatable]
+        public float SourceSize { get; set; }
+
+        /// <summary>
         ///     Controls how quickly the light falls off in power in its radius.
         ///     A higher value means a stronger falloff.
         /// </summary>

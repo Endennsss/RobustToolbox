@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
@@ -89,6 +90,15 @@ public abstract class SharedPointLightSystem : EntitySystem
         Dirty(uid, comp);
     }
 
+    public void SetSourceSize(EntityUid uid, float value, SharedPointLightComponent? comp = null)
+    {
+        if (!ResolveLight(uid, ref comp) || MathHelper.CloseToPercent(comp.SourceSize, value))
+            return;
+
+        comp.SourceSize = MathF.Max(0f, value);
+        Dirty(uid, comp);
+    }
+
     public void SetFalloff(EntityUid uid, float value, SharedPointLightComponent? comp = null)
     {
         if (!ResolveLight(uid, ref comp) || MathHelper.CloseToPercent(comp.Falloff, value))
@@ -120,6 +130,7 @@ public abstract class SharedPointLightSystem : EntitySystem
             Offset = component.Offset,
             Radius = component.Radius,
             Softness = component.Softness,
+            SourceSize = component.SourceSize,
             Falloff = component.Falloff,
             CurveFactor = component.CurveFactor,
             CastShadows = component.CastShadows,
