@@ -14,6 +14,8 @@ public sealed class PointLightComponentState : ComponentState
 
     public float Softness;
 
+    public float SourceSize; // Lime-Edit - синхронизация размера источника
+
     public float Falloff;
 
     public float CurveFactor;

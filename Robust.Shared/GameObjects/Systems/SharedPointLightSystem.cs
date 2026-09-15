@@ -1,3 +1,4 @@
+using System; // Lime-Edit - проверка и ограничение размера источника
 using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.ComponentTrees;
@@ -129,6 +130,22 @@ public abstract class SharedPointLightSystem : EntitySystem
         Dirty(uid, comp);
     }
 
+    // Lime added start - безопасное изменение независимого размера источника
+    /// <summary>Sets a finite, non-negative physical source radius.</summary>
+    public void SetSourceSize(EntityUid uid, float value, SharedPointLightComponent? comp = null)
+    {
+        if (!float.IsFinite(value))
+            return;
+
+        value = MathF.Max(0f, value);
+        if (!ResolveLight(uid, ref comp) || MathHelper.CloseToPercent(comp.SourceSize, value))
+            return;
+
+        comp.SourceSize = value;
+        Dirty(uid, comp);
+    }
+    // Lime added end
+
     public void SetFalloff(EntityUid uid, float value, SharedPointLightComponent? comp = null)
     {
         if (!ResolveLight(uid, ref comp) || MathHelper.CloseToPercent(comp.Falloff, value))
@@ -160,6 +177,7 @@ public abstract class SharedPointLightSystem : EntitySystem
             Offset = component.Offset,
             Radius = component.Radius,
             Softness = component.Softness,
+            SourceSize = component.SourceSize, // Lime-Edit - синхронизация размера источника
             Falloff = component.Falloff,
             CurveFactor = component.CurveFactor,
             CastShadows = component.CastShadows,

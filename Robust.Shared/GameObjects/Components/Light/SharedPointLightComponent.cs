@@ -37,6 +37,15 @@ namespace Robust.Shared.GameObjects
         [DataField("softness"), Animatable]
         public float Softness { get; set; } = 1f;
 
+        // Lime added start - размер источника отдельно от радиуса освещения
+        /// <summary>
+        /// Physical source radius in world units. Widens the illuminated core and penumbra
+        /// without changing the light's range. Zero preserves the original point light.
+        /// </summary>
+        [DataField, Animatable]
+        public float SourceSize { get; set; }
+        // Lime added end
+
         /// <summary>
         ///     Controls how quickly the light falls off in power in its radius.
         ///     A higher value means a stronger falloff.

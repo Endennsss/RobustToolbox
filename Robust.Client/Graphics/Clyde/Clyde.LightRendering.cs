@@ -472,6 +472,7 @@ namespace Robust.Client.Graphics.Clyde
             var lastPower = float.NaN;
             var lastColor = new Color(float.NaN, float.NaN, float.NaN, float.NaN);
             var lastSoftness = float.NaN;
+            var lastSourceSize = float.NaN; // Lime-Edit - кэш параметра между источниками
             var lastFalloff = float.NaN;
             var lastCurveFactor = float.NaN;
             Texture? lastMask = null;
@@ -524,6 +525,14 @@ namespace Robust.Client.Graphics.Clyde
                         lastSoftness = component.Softness;
                         lightShader.SetUniformMaybe("lightSoftness", lastSoftness);
                     }
+
+                    // Lime added start - передача размера источника без лишних обновлений uniform
+                    if (!MathHelper.CloseToPercent(lastSourceSize, component.SourceSize))
+                    {
+                        lastSourceSize = component.SourceSize;
+                        lightShader.SetUniformMaybe("lightSourceSize", lastSourceSize);
+                    }
+                    // Lime added end
 
                     if (!MathHelper.CloseToPercent(lastFalloff, component.Falloff))
                     {

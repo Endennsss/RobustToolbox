@@ -29,6 +29,7 @@ namespace Robust.Client.GameObjects
             component.Enabled = state.Enabled;
             component.Offset = state.Offset;
             component.Softness = state.Softness;
+            component.SourceSize = state.SourceSize; // Lime-Edit - синхронизация размера источника
             component.Falloff = state.Falloff;
             component.CurveFactor = state.CurveFactor;
             component.CastShadows = state.CastShadows;
