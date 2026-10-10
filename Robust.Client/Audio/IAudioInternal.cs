@@ -30,7 +30,8 @@ internal interface IAudioInternal : IAudioManager
     /// Returns a buffered audio source.
     /// </summary>
     /// <returns>null if unable to create the source.</returns>
-    IBufferedAudioSource? CreateBufferedAudioSource(int buffers, bool floatAudio=false);
+    // Orbitra-Edit: сохраняем внутренний контракт после расширения публичного API.
+    new IBufferedAudioSource? CreateBufferedAudioSource(int buffers, bool floatAudio=false);
 
     /// <summary>
     /// Sets the velocity for the audio listener.

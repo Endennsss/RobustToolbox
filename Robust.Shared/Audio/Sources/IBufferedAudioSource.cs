@@ -2,7 +2,8 @@ using System;
 
 namespace Robust.Shared.Audio.Sources;
 
-internal interface IBufferedAudioSource : IAudioSource
+// Orbitra-Edit: интерфейс доступен контенту для непрерывного голоса.
+public interface IBufferedAudioSource : IAudioSource
 {
     int SampleRate { get; set; }
     int GetNumberOfBuffersProcessed();

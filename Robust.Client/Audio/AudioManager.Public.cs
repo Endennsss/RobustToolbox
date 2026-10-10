@@ -66,6 +66,7 @@ internal partial class AudioManager
         }
     }
 
+    // Orbitra-Edit: открываем буферный источник для потокового голоса.
     /// <inheritdoc/>
     public void SetVelocity(Vector2 velocity)
     {
@@ -350,7 +351,7 @@ internal partial class AudioManager
     }
 
     /// <inheritdoc/>
-    IBufferedAudioSource? IAudioInternal.CreateBufferedAudioSource(int buffers, bool floatAudio)
+    public IBufferedAudioSource? CreateBufferedAudioSource(int buffers, bool floatAudio = false)
     {
         var source = AL.GenSource();
 

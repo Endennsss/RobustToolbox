@@ -25,6 +25,12 @@ public interface IAudioManager
 
     IAudioSource? CreateAudioSource(AudioStream stream);
 
+    // Orbitra-Edit: голосовому чату нужен непрерывный PCM-поток.
+    /// <summary>
+    /// Creates a source that can be fed with short PCM blocks without restarting playback.
+    /// </summary>
+    IBufferedAudioSource? CreateBufferedAudioSource(int buffers, bool floatAudio = false);
+
     AudioStream LoadAudioOggVorbis(Stream stream, string? name = null);
 
     AudioStream LoadAudioWav(Stream stream, string? name = null);
