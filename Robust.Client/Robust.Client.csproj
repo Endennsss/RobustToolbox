@@ -10,6 +10,9 @@
     <RobustILLink>true</RobustILLink>
   </PropertyGroup>
   <ItemGroup>
+    <!-- Orbitra added start - захват OpenAL и managed Opus работают в доверенном engine-контексте. -->
+    <Compile Include="../../Tools/_Orbitra/VoiceChatBackend/*.cs" Link="_Orbitra/VoiceChatBackend/%(Filename)%(Extension)" />
+    <!-- Orbitra added end -->
     <PackageReference Include="DiscordRichPresence" PrivateAssets="compile" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" PrivateAssets="compile" />
@@ -19,6 +22,9 @@
     <PackageReference Include="SixLabors.ImageSharp" />
     <PackageReference Include="OpenToolkit.Graphics" PrivateAssets="compile" />
     <PackageReference Include="OpenTK.Audio.OpenAL" PrivateAssets="compile" />
+    <!-- Orbitra added start - managed Opus нужен доверенному engine-контексту для sandbox-клиента. -->
+    <PackageReference Include="Concentus" PrivateAssets="compile" />
+    <!-- Orbitra added end -->
     <PackageReference Include="SpaceWizards.SharpFont" PrivateAssets="compile" />
     <PackageReference Include="SpaceWizards.Sdl" PrivateAssets="compile" />
     <PackageReference Include="Robust.Natives" />
